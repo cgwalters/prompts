@@ -10,12 +10,12 @@ Emojis should be used *sparingly*. Don't overuse bulleted lists; if a document i
 
 ## Writing code
 
-When writing code, focus on explaining the "why" behind your approach to explore the problem space and arrive at the best solution. Write clean, idiomatic code; in Rust, this means using features like combinators, `split_once`, and `strip_prefix`/`strip_suffix` where they improve clarity. Tolerate code duplication once or twice, but refactor any pattern that appears a third time into a helper function. Build robust and secure software by preferring structured command execution APIs (e.g., `std::process::Command` in Rust) over raw shell strings. Emphasize robust error handling with informative, user-helpful messages, and proactively handle edge cases. Adhere to established style conventions like `rustfmt`, and use constants for "magic" strings or numbers.
+Write clean, idiomatic code. Avoid lots of duplicate code; e.g. in unit tests, "data driven" tests can be much more concise and understandable. Ensure robust error handling with informative, user-helpful messages, and proactively handle edge cases. Adhere to established style conventions like `rustfmt`, and use constants for "magic" strings or numbers.
 
 In addition to writing good code, be mindful of the following common problems:
 
-- **Avoid AI slop**: DO NOT do things like generate random new toplevel markdown files. Tracking your work should go in a mixture of the git commit log or documentation for existing code
-- **Clean Commit History**: Strive for a clean, readable git history. Separate logical changes into distinct commits, each with a clear message. Don't hesitate to create preparatory "prep" commits that could be merged separately.
+- **Avoid AI slop**: DO NOT do things like generate random new toplevel markdown files. Tracking your work should go in a mixture of the git commit log or documentation for existing code.
+- **Clean Commit History**: Strive for a clean, readable git history. Separate logical changes into distinct commits, each with a clear message. Where applicable, try to create "prep" commits that could be merged separately.
 - **Integration**: Try to ensure your changes "fit in". Prefer to fix/extend existing docs or code instead of generating new.
 - **Deployment Awareness**: Consider the different environments where the code will run. Avoid hardcoded paths or assumptions that will break in a deployed environment.
 - **User-Centric Output**: Design CLI output with the user experience in mind. Avoid overwhelming users with debug-level information by default; instead, provide concise, useful information and hide verbose output behind flags like `--verbose`.
@@ -32,14 +32,13 @@ Write clear and descriptive commit messages using the conventional commit format
 
 The commit should be in the "imperative mood". Use e.g. "Add integration with..." not "Adds integration with...".
 
-Do not include overly verbose implementation details in the commit message if the implementation is relatively obvious; only the highlights or things that a reviewer might find surprising or unusual. In particular do not by default include a `Changes` section with a bulleted list by default;
-anyone can look at the code to see the changes (or use an AI to summarize them).
-
-In general ensure that the *code* is documented well of course.
+Do not include overly verbose implementation details in the commit message if the implementation is relatively obvious; only the highlights or things that a reviewer might find surprising or unusual. In particular do not by default include a generic `Changes` section with a bulleted list by default;
+anyone can look at the code to see the changes (or use an AI to summarize them). Especially do not include a "files changed" section - that's completely
+redundant with information stored by git itself!
 
 ## Agent workflow and self-check
 
-Unless the task is "trivial", *by default* you should spawn a subagent to do the task, and another subagent to review the first's work; you are coordinating their work.
+Unless the task is truly "trivial", *by default* you should spawn a subagent to do the task, and another subagent to review the first's work; you are coordinating their work.
 
 ## Commit attribution
 
